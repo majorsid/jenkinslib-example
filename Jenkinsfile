@@ -12,10 +12,6 @@ node() {
     }
 
     stage('Print StackTrace') {
-      try {
-        throw "error"
-        } catch (err) {
-          err.printStackTrace()
-        }
+      rintStackTrace()
     }
 }
