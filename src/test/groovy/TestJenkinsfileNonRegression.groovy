@@ -22,5 +22,9 @@ class TestJenkinsfileNonRegression extends BaseRegressionTest {
     void testNonReg() throws Exception {
         runScript("Jenkinsfile")
         super.testNonRegression('example')
+        String callStack = helper.callStack.join('\n') + '\n'
+        assertThat(callStack.normalize())
+                        .as('If you intended to update the callstack, use JVM parameter -D%s=true', PIPELINE_STACK_WRITE)
+                        .isEqualTo(referenceFile.text.normalize())
     }
 }
