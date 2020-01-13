@@ -10,4 +10,12 @@ node() {
       sh "${GRADLE_HOME}/bin/gradle build"
       junit 'build/test-results/**/*.xml'
     }
+
+    stage('Print StackTrace') {
+      try {
+        throw "error"
+        } catch (err) {
+          err.printStackTrace()
+        }
+    }
 }
