@@ -1,7 +1,7 @@
 node() {
   properties([
           parameters([
-                  string(name: 'tags', defaultValue: "NO_TAG"),
+                  string(name: 'tag', defaultValue: "NO_TAG"),
           ])
   ])
   stage ('Checkout') {
