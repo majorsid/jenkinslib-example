@@ -12,7 +12,7 @@ node() {
     //junit 'build/test-results/test/TEST-TestJenkinsfileNonRegression.xml'
   }
 
-  stage("Creating Tag ${tag_name}") {
+  stage('Creating Tag') {
     // def tagExist = sh "git tag -l '${tag_name}'"
     sh "git tag '${tag_name}'"
     //If exist set variable ansibleRoleBranch
