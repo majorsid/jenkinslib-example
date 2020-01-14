@@ -1,22 +1,22 @@
 node() {
   properties([
           parameters([
-                  string(name: 'tag', defaultValue: "NO_TAG"),
+                  string(name: 'tag_name', defaultValue: "NO_TAG"),
           ])
   ])
-  stage ('Checkout') {
+  stage ("Checkout") {
     checkout scm
     sh 'git clean -xdf'
   }
 
-  stage('Build') {
+  stage("Build") {
     def GRADLE_HOME = tool name: 'gradle', type: 'hudson.plugins.gradle.GradleInstallation'
     sh "${GRADLE_HOME}/bin/gradle build"
     junit 'build/test-results/**/*.xml'
     //junit 'build/test-results/test/TEST-TestJenkinsfileNonRegression.xml'
   }
 
-  stage('Creating Tag') {
+  stage("Creating Tag ${tag_name}") {
     // def tagExist = sh "git tag -l '${tag_name}'"
     // sh "git tag '${tag_name}'"
     // //If exist set variable ansibleRoleBranch
