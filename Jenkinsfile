@@ -9,9 +9,6 @@ node() {
       def GRADLE_HOME = tool name: 'gradle', type: 'hudson.plugins.gradle.GradleInstallation'
       sh "${GRADLE_HOME}/bin/gradle build"
       junit 'build/test-results/**/*.xml'
-    }
-
-    stage('Print StackTrace') {
-      rintStackTrace()
+      junit 'build/test-results/test/TEST-TestJenkinsfileNonRegression.xml'
     }
 }
