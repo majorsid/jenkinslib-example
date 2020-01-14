@@ -12,7 +12,6 @@ class TestJenkinsfile extends BasePipelineTest {
     void setUp() throws Exception {
         super.setUp()
         binding.setVariable('scm', [$class: 'GitSCM'])
-        binding.setVariable('env', [PATH: "/bin", "CLEAN":"false"])
 
         helper.registerAllowedMethod("tool", [Map.class], { c -> '/bin/gradle' })
         helper.registerAllowedMethod("tool", [String.class], { c -> '/bin/gradle' })
