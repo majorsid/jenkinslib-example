@@ -1,6 +1,10 @@
 node() {
+  properties([
+          parameters([
+                  string(name: 'tags', defaultValue: "NO_TAG"),
+          ])
+  ])
   stage ('Checkout') {
-    sh 'rm -Rf *'
     checkout scm
     sh 'git clean -xdf'
   }
@@ -13,12 +17,21 @@ node() {
   }
 
   stage('Creating Tag') {
-      // def tagExist = sh "git tag -l '${tag_name}'"
-    sh "git tag '${tag_name}'"
-      //If exist set variable ansibleRoleBranch
-      // if (!tagExist.isEmpty()){
-      //     sh "git tag '${tag_name}'"
-      // else
-      //     sh "git tag -d '${tag_name}'"
-   }
+    // def tagExist = sh "git tag -l '${tag_name}'"
+    // sh "git tag '${tag_name}'"
+    // //If exist set variable ansibleRoleBranch
+    // if (tagExist == tag_name) {
+    //     sh "git tag -d '${tag_name}'"
+
+    if("${tag_name}"=="NO_TAG"){
+
+        sh"""
+                git tag '${tag_name}'
+            """
+    }else {
+        sh"""
+                git tag -d '${tag_name}'
+            """
+        }
+    }
 }
