@@ -32,5 +32,5 @@ class TestJenkinsfile extends BasePipelineTest {
     //     runScript("Jenkinsfile")
     //     printCallStack()
     //     assertJobStatusSuccess()
-    }
+    // }
 }
