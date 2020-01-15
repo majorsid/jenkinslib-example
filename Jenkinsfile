@@ -12,18 +12,23 @@ node() {
   }
 
   stage("Creating Tag ${tag_name}") {
-    def tagExist = sh "git tag -l '${tag_name}'"
+    def tagExist = sh (
+        script: "git tag -l '${tag_name}'",
+        returnStdout: true
+    ).trim()
+
+    if (!tagExist){
+        sh "git tag -d '${tag_name}'"
+    }
     // sh "git tag '${tag_name}'"
     // //If exist set variable ansibleRoleBranch
     // if (tagExist == tag_name) {
     //     sh "git tag -d '${tag_name}'"
 
-    if(!tagExist.isEmpty()){
-        sh "git tag -d '${tag_name}'"
-        returnStdout: true
-    } else  {
-        sh "git tag -d '${tag_name}'"
-        returnStdout: false
-    }
+    // if("${tag_name}" != tagExist){
+    //     sh "git tag '${tag_name}'"
+    // } else  {
+    //     sh "git tag -d '${tag_name}'"
+    // }
   }
 }

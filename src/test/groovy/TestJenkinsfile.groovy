@@ -19,7 +19,6 @@ class TestJenkinsfile extends BasePipelineTest {
         helper.registerAllowedMethod("withEnv", [ArrayList.class, Closure.class], { a, c -> c.call() })
         helper.registerAllowedMethod("fileExists", [String.class], { c -> false })
         helper.registerAllowedMethod("parameters", [ArrayList.class], { c -> false })
-        helper.registerAllowedMethod("isEmpty", [String.class], { c -> false })
     }
 
 
