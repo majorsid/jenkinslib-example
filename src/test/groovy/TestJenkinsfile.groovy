@@ -12,13 +12,10 @@ class TestJenkinsfile extends BasePipelineTest {
     void setUp() throws Exception {
         super.setUp()
         binding.setVariable('scm', [$class: 'GitSCM'])
-        binding.setVariable('tag_name', [$class: 'GitSCM'])
 
         helper.registerAllowedMethod("tool", [Map.class], { c -> '/bin/gradle' })
         helper.registerAllowedMethod("tool", [String.class], { c -> '/bin/gradle' })
-        helper.registerAllowedMethod("withEnv", [ArrayList.class, Closure.class], { a, c -> c.call() })
-        helper.registerAllowedMethod("fileExists", [String.class], { c -> false })
-        helper.registerAllowedMethod("parameters", [ArrayList.class], { c -> false })
+
     }
 
 
@@ -34,5 +31,5 @@ class TestJenkinsfile extends BasePipelineTest {
     //     runScript("Jenkinsfile")
     //     printCallStack()
     //     assertJobStatusSuccess()
-    // }
+    }
 }
