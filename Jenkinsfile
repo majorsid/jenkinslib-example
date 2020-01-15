@@ -1,9 +1,4 @@
 node() {
-  properties([
-          parameters([
-                  string(name: 'tag_name', defaultValue: "NO_TAG"),
-          ])
-  ])
   stage ("Checkout") {
     checkout scm
     sh 'git clean -xdf'
@@ -23,14 +18,12 @@ node() {
     // if (tagExist == tag_name) {
     //     sh "git tag -d '${tag_name}'"
 
-    if("${tag_name}"==tagExist){
-        sh"""
-                git tag -d '${tag_name}'
-            """
-    }else {
-        sh"""
-                git tag '${tag_name}'
-            """
-        }
+    if(!tagExist.isEmpty()){
+        sh "git tag -d '${tag_name}'"
+        returnStdout: true
+    } else  {
+        sh "git tag -d '${tag_name}'"
+        returnStdout: false
     }
+  }
 }
