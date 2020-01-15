@@ -22,27 +22,15 @@ class TestJenkinsfile extends BasePipelineTest {
 
 
     @Test
-    void should_execute_without_errors_and_gradle_build() throws Exception {
-        runScript("Jenkinsfile")
-        printCallStack()
-        assertThat(helper.callStack.findAll { call ->
-            call.methodName == "sh"
-        }.any { call ->
-            callArgsToString(call).contains("gradle build")
-        }).isTrue()
-        assertJobStatusSuccess()
-    }
-
-    @Test
-    void should_execute_without_errors_and_gradle_clean_build() throws Exception {
-        binding.setVariable('env', [PATH: "/bin", "CLEAN":"true"])
-        runScript("Jenkinsfile")
-        printCallStack()
-        assertThat(helper.callStack.findAll { call ->
-            call.methodName == "sh"
-        }.any { call ->
-            callArgsToString(call).contains("gradle clean build")
-        }).isTrue()
-        assertJobStatusSuccess()
+    void test_simple_pipeline() throws Exception {
+        try {
+            def script = runScript("Jenkinsfile")
+            script.execute()
+            printCallStack()
+        } catch (e) {
+            e.printStackTrace()
+            exception = true
+        }
+        assertThat(exception).isFalse()
     }
 }
