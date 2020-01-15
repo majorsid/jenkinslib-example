@@ -23,12 +23,12 @@ class TestJenkinsfile extends BasePipelineTest {
 
     @Test
     void test_simple_pipeline() throws Exception {
-        try {
+        // try {
             runScript("Jenkinsfile")
-        } catch (e) {
-            e.printStackTrace()
-            exception = true
-        }
-        assertThat(exception).isFalse()
+        // } catch (e) {
+        //     e.printStackTrace()
+        //     exception = true
+        // }
+        // assertThat(exception).isFalse()
     }
 }
