@@ -24,9 +24,7 @@ class TestJenkinsfile extends BasePipelineTest {
     @Test
     void test_simple_pipeline() throws Exception {
         try {
-            def script = runScript("Jenkinsfile")
-            script.execute()
-            printCallStack()
+            runScript("Jenkinsfile")
         } catch (e) {
             e.printStackTrace()
             exception = true
